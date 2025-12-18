@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>MapmyIndia Debug — Nagpur</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- REPLACE the key below with your MapmyIndia JS SDK key -->
+    <script src="https://apis.mappls.com/advancedmaps/v1/8a1d60d10e12dbeb774d0aab441919b7/map_load?v=1.5"></script>
+    <style>
+      body { font-family: Arial; margin: 0; display: flex; height: 100vh; }
+
+      #left { width: 65%; padding: 8px; box-sizing: border-box; }
+      #map { height: calc(100vh - 24px); border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+      #debugBox { width: 35%; padding: 8px; box-sizing: border-box; border-left: 1px solid #ddd; overflow:auto; background:#f9f9f9; }
+      pre { white-space: pre-wrap; word-wrap: break-word; font-size:13px; }
+      .error { color: #b00020; font-weight:600; }
+      .ok { color: #0a7f3a; font-weight:600; }
+      .warn { color: #b07600; font-weight:600; }
+    </style>
+  </head>
+  <body>
+    <div id="left">
+      <h2>MapmyIndia — Nagpur debug</h2>
+      <div id="map"></div>
+    </div>
+
+    <div id="debugBox">
+      <h3>Debug output</h3>
+      <pre id="logArea">Starting debug...\n</pre>
+    </div>
+
+<script>
+  var map = new MapmyIndia.Map("map", {
+    center: [21.1458, 79.0882],
+    zoom: 13
+  });
+
+  // Fetch JSON and plot points
+  fetch("locations.json")
+    .then(response => response.json())
+    .then(data => {
+      console.log("✅ Loaded locations:", data);
+
+      data.forEach(loc => {
+        if (!loc.Latitude || !loc.Longitude) return;
+
+        // ✅ Use Leaflet marker syntax instead of MapmyIndia.Marker
+        var marker = L.marker([parseFloat(loc.Latitude), parseFloat(loc.Longitude)])
+          .addTo(map)
+          .bindPopup(`<b>${loc.Name}</b><br>Lat: ${loc.Latitude}<br>Lng: ${loc.Longitude}`);
+      });
+    })
+    .catch(err => console.error("❌ Error loading JSON:", err));
+</script>
+
+  </body>
+</html>

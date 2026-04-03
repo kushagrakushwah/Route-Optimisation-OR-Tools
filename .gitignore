@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pkl
+*.log
+
+data/raw/*
+data/input/*
+results/*
+papers/*
+
+.env
+.ipynb_checkpoints/
+.venv/
+venv/

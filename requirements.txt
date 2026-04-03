@@ -1,0 +1,17 @@
+# Google Optimization Tools
+ortools>=9.8.0
+
+# Data Manipulation & Numerical Computing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Geographic & Distance Calculations
+geopy>=2.3.0
+scipy>=1.10.0
+
+# Visualization (Optional but recommended for notebooks)
+matplotlib>=3.7.0
+plotly>=5.13.0
+
+# Machine Learning & Predictive Analytics
+scikit-learn>=1.2.0
